@@ -1,7 +1,7 @@
 # require_relative 'helpers/session'
 
-feature 'User sign in' do
-  let!(:user) do
+feature 'User signs out' do
+  before(:each) do
     User.create(email: 'user@example.com',
                 name: 'user',
                 username: 'user1',
@@ -9,16 +9,17 @@ feature 'User sign in' do
                 password_confirmation: 'password')
   end
 
-  scenario 'with correct credentials' do
-    sign_in(email: user.email,   password: user.password)
-    expect(page).to have_content "Welcome, User"
+  scenario 'while being signed in' do
+    sign_in(email: 'user@example.com', password: 'password')
+    click_button 'Sign out'
+    expect(page).to have_content('Goodbye!')
+    expect(page).not_to have_content('Welcome, user')
   end
-  # 
+
   # def sign_in(email:, password:)
   #   visit '/sessions/new'
   #   fill_in :email, with: email
   #   fill_in :password, with: password
   #   click_button 'Sign in'
   # end
-
 end

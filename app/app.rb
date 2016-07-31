@@ -8,6 +8,7 @@ class ChitterChallenge < Sinatra::Base
   register Sinatra::Flash
   enable :sessions
   set :sessions_secret, 'super secret'
+  use Rack::MethodOverride
 
   get '/' do
     redirect '/users/new'
@@ -21,7 +22,7 @@ end
 
   get '/users/new' do
     @user = User.new
-    erb :'sign_up'
+    erb :'users/sign_up'
   end
 
   post '/users' do
@@ -30,15 +31,36 @@ end
     password_confirmation: params[:password_confirmation])
   if @user.save
     session[:user_id] = @user.id
-    redirect '/peeps'
+    redirect 'sessions/peeps'
   else
     flash.now[:errors] = @user.errors.full_messages
-    erb :'sign_up'
+    erb :'users/sign_up'
   end
 end
 
-get '/peeps' do
-  erb :'peeps'
+get '/sessions/new' do
+  erb :'sessions/new'
+end
+
+post '/sessions' do
+  user = User.authenticate(params[:email], params[:password])
+  if user
+    session[:user_id] = user.id
+    redirect to('/sessions/peeps')
+  else
+    flash.now[:errors] = ['The email or password is incorrect']
+    erb :'sessions/new'
+  end
+end
+
+delete '/sessions' do
+  session[:user_id] = nil
+  flash.keep[:notice] = 'Goodbye!'
+  redirect to '/sessions/peeps'
+end
+
+get '/sessions/peeps' do
+  erb :'sessions/peeps'
 end
 
 

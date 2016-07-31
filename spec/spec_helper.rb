@@ -9,6 +9,7 @@ require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
 # require 'features/web_helpers.rb'
+require_relative 'helpers/session'
 
 SimpleCov.formatters = [
  SimpleCov::Formatter::HTMLFormatter,
@@ -17,8 +18,15 @@ SimpleCov.formatters = [
 Coveralls.wear!
 
 Capybara.app = ChitterChallenge
+#
+# RSpec.configure do |config|
+#   config.include SessionHelpers
+# end
 
 RSpec.configure do |config|
+
+  config.include SessionHelpers
+
  config.before(:suite) do
    DatabaseCleaner.strategy = :transaction
    DatabaseCleaner.clean_with(:truncation)
