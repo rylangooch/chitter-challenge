@@ -8,7 +8,6 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
-# require 'features/web_helpers.rb'
 require_relative 'helpers/session'
 
 SimpleCov.formatters = [

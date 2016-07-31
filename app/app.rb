@@ -1,24 +1,34 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
-require_relative 'models/datamapper_setup'
 require 'sinatra/flash'
+require 'sinatra/partial'
+
+require_relative 'datamapper_setup'
+
+# require_relative 'server'
+# require_relative 'controllers/sessions'
+# require_relative 'controllers/users'
+
 
 class ChitterChallenge < Sinatra::Base
   register Sinatra::Flash
   enable :sessions
   set :sessions_secret, 'super secret'
   use Rack::MethodOverride
+  set :partial_template_engine, :erb
+  enable :partial_underscores
 
   get '/' do
     redirect '/users/new'
   end
 
+
   helpers do
-  def current_user
-    @current_user ||= User.get(session[:user_id])
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
   end
-end
 
   get '/users/new' do
     @user = User.new
@@ -62,7 +72,6 @@ end
 get '/sessions/peeps' do
   erb :'sessions/peeps'
 end
+run! if app_file == $0
 
-
-  run! if app_file == $0
 end
