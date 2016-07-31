@@ -8,6 +8,7 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
+require './app/models/peep'
 require_relative 'helpers/session'
 
 SimpleCov.formatters = [
