@@ -11,17 +11,26 @@ class ChitterChallenge < Sinatra::Base
   enable :sessions
   set :sessions_secret, 'super secret'
   use Rack::MethodOverride
-  set :partial_template_engine, :erb
-  enable :partial_underscores
-
-  get '/' do
-    redirect '/users/new'
-  end
 
   helpers do
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+  end
+
+  get '/' do
+    redirect '/peeps'
+  end
+
+  get '/peeps' do
+    @peeps = Peep.all
+    erb :'/peeps/index'
+  end
+
+  post '/peeps/new' do
+    peep = Peep.new(peep: params[:peep], user: current_user)
+    peep.save
+    redirect to '/peeps'
   end
 
   get '/users/new' do
@@ -60,12 +69,7 @@ class ChitterChallenge < Sinatra::Base
   delete '/sessions' do
     session[:user_id] = nil
     flash.keep[:notice] = 'Goodbye!'
-    redirect to '/peeps'
-  end
-
-  get '/peeps' do
-    @peeps = Peep.all
-    erb :'peeps/index'
+    redirect to '/'
   end
 
   run! if app_file == $0

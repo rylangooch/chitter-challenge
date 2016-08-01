@@ -18,10 +18,6 @@ SimpleCov.formatters = [
 Coveralls.wear!
 
 Capybara.app = ChitterChallenge
-#
-# RSpec.configure do |config|
-#   config.include SessionHelpers
-# end
 
 RSpec.configure do |config|
 
