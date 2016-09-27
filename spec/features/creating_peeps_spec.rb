@@ -7,7 +7,7 @@ feature 'Creating peeps' do
                 password_confirmation: 'password')
   end
 
-  scenario 'I can create a new peep' do
+  scenario 'I can create a new peep with my name and the peep text' do
     visit '/peeps'
     click_button 'Sign in'
     sign_in(user)
@@ -16,7 +16,7 @@ feature 'Creating peeps' do
     expect(current_path).to eq '/peeps'
 
     within 'ul#peeps' do
-    expect(page).to have_content('Author: Peep: Chitter, I have arrived')
+    expect(page).to have_content('Author: user1 Peep: Chitter, I have arrived')
     end
   end
 

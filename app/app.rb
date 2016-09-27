@@ -47,7 +47,7 @@ class ChitterChallenge < Sinatra::Base
     # redirect to '/peeps'
       if current_user
         peep = Peep.new(text: params[:text])
-        peep.user = [current_user]
+        peep.user = current_user
         peep.save
         redirect '/peeps'
       else

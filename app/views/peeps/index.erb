@@ -22,7 +22,7 @@
 <ul id='peeps'>
   <% @peeps.each do |peep| %>
     <li>
-      Author:   <%= peep.author %>
+      Author:   <%= peep.user.username %>
       Peep: <%= peep.text %>
     </li>
   <% end %>
