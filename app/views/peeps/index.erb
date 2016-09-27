@@ -6,12 +6,10 @@
     <!-- <label for='peep'>
     Peep: <input type="text" name="message"> -->
     <label for='peep'>
-      Peep: <input name='peep' type='text'>
+      Peep: <input id='peep' name='text' type='text'>
     </label>
-    <input type="submit" value='Submit'>
+    <input type="submit" value='Peep'>
   </form>
-
-
 <% else %>
   <form action="/users/new">
     <input type="submit" value="Sign up">
@@ -25,7 +23,7 @@
   <% @peeps.each do |peep| %>
     <li>
       Author:   <%= peep.author %>
-      Peep: <%= peep.peep %>
+      Peep: <%= peep.text %>
     </li>
   <% end %>
 </ul>

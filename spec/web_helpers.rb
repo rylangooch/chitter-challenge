@@ -7,3 +7,10 @@ def sign_up
   fill_in :password_confirmation, :with => 'user'
   click_button 'Save user'
 end
+
+def sign_in
+  visit '/users/new'
+  fill_in :email, :with => 'user@example.com'
+  fill_in :password, :with => 'password'
+  click_button 'Sign in'
+end

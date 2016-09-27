@@ -1,4 +1,4 @@
-# require_relative '../helpers/session.rb'
+require_relative '../helpers/session.rb'
 
 feature 'user sign up' do
   scenario 'storing a user profile' do
