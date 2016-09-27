@@ -1,5 +1,3 @@
-# require_relative 'helpers/session'
-
 feature 'User sign in' do
   let!(:user) do
     User.create(email: 'user@example.com',
@@ -10,9 +8,7 @@ feature 'User sign in' do
   end
 
   scenario 'with correct credentials' do
-    sign_in(email: user.email,   password: user.password)
+    sign_in(user)
     expect(page).to have_content "Welcome, User"
   end
-
-
 end

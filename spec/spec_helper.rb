@@ -9,7 +9,7 @@ require 'capybara/rspec'
 require 'rspec'
 require 'database_cleaner'
 require './app/models/peep'
-require_relative 'helpers/session'
+require_relative 'helpers'
 
 SimpleCov.formatters = [
  SimpleCov::Formatter::HTMLFormatter,
@@ -21,7 +21,7 @@ Capybara.app = ChitterChallenge
 
 RSpec.configure do |config|
 
-  config.include SessionHelpers
+  config.include Helpers
 
  config.before(:suite) do
    DatabaseCleaner.strategy = :transaction

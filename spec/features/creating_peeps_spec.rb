@@ -1,8 +1,6 @@
-require_relative '../web_helpers.rb'
-
 feature 'Creating peeps' do
-  before(:each) do
-    User.create(email: 'user@example.com',
+  let!(:user) do
+      User.create(email: 'user@example.com',
                 name: 'user',
                 username: 'user1',
                 password: 'password',
@@ -12,10 +10,7 @@ feature 'Creating peeps' do
   scenario 'I can create a new peep' do
     visit '/peeps'
     click_button 'Sign in'
-    # sign_in
-    fill_in :email, :with => 'user@example.com'
-    fill_in :password, :with => 'password'
-    click_button 'Sign in'
+    sign_in(user)
     fill_in 'peep', with: 'Chitter, I have arrived'
     click_button 'Peep'
     expect(current_path).to eq '/peeps'
