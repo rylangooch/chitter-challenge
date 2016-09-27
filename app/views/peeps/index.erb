@@ -22,8 +22,7 @@
 <ul id='peeps'>
   <% @peeps.each do |peep| %>
     <li>
-      Author:   <%= peep.user.username %>
-      Peep: <%= peep.text %>
+      <%= peep.user.username.capitalize %>: <%= peep.text %>
     </li>
   <% end %>
 </ul>

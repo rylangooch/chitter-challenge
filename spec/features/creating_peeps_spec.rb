@@ -16,7 +16,7 @@ feature 'Creating peeps' do
     expect(current_path).to eq '/peeps'
 
     within 'ul#peeps' do
-    expect(page).to have_content('Author: user1 Peep: Chitter, I have arrived')
+    expect(page).to have_content('User1: Chitter, I have arrived')
     end
   end
 
