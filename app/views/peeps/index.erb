@@ -1,5 +1,4 @@
-<h1> Peeps </h1>
-<h2> Hi, please sign up or login to leave a peep </h2>
+<h1> Chitter </h1>
 
 <% if current_user %>
   <form action='/peeps' method='post'>
@@ -11,6 +10,7 @@
     <input type="submit" value='Peep'>
   </form>
 <% else %>
+  <h2> Hi, please sign up or login to leave a peep </h2>
   <form action="/users/new">
     <input type="submit" value="Sign up">
   </form>
@@ -22,12 +22,10 @@
 
 <% unless @peeps.nil?%>
   <% @peeps.reverse_each do |peep| %>
-    <% if !peep.created_at.nil? %>
-      <div class='center'>
-        <p>username: <%=peep.user.username%><br></p>
-        <p1><%= peep.text %><br></p1>
-        <p>Posted: <%=peep.created_at.strftime("on %m/%d/%Y, at %I:%M%p")%></p>
-      </div><br>
-    <% end %>
+    <div class='center'>
+      <p>username: <%=peep.user.username%><br></p>
+      <p1><%= peep.text %><br></p1>
+      <p>Posted: <%=peep.created_at.strftime("on %m/%d/%Y, at %I:%M%p")%></p>
+    </div><br>
   <% end %>
 <% end %>

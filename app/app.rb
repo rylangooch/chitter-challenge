@@ -27,27 +27,9 @@ class ChitterChallenge < Sinatra::Base
     erb :'/peeps/index'
   end
 
- #  post '/peeps' do
- #   if current_user
- #     peep = Peep.create(body: params[:peep], time: Time.now)
- #     peep.user = current_user
- #     peep.peep = Peep.get(params[:in_reply_to])
- #     peep.save
- #     redirect '/peeps'
- #   else
- #     flash.keep[:notifications] = ['You need to log in to peep']
- #     redirect '/peeps'
- #   end
- # end
-
   post '/peeps' do
-    # peep = Peep.create(text: params[:text])
-    # peep.user = current_user
-    # peep.save
-    # redirect to '/peeps'
       if current_user
         peep = Peep.create(text: params[:text], user: current_user)
-        # peep.user = current_user
         peep.save
         redirect '/peeps'
       else
