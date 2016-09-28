@@ -11,9 +11,7 @@ feature 'Viewing peeps' do
 
     visit 'peeps'
     expect(page.status_code).to eq 200
-
-    within 'ul#peeps' do
-      expect(page).to have_content('Chitter, I have arrived')
-    end
+    expect(page).to have_content('Chitter, I have arrived')
   end
+
 end

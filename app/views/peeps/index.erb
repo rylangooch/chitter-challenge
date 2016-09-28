@@ -2,8 +2,6 @@
 
 <% if current_user %>
   <form action='/peeps' method='post'>
-    <!-- <label for='peep'>
-    Peep: <input type="text" name="message"> -->
     <label for='peep'>
       Peep: <input id='peep' name='text' type='text'>
     </label>
@@ -23,7 +21,7 @@
 <% unless @peeps.nil?%>
   <% @peeps.reverse_each do |peep| %>
     <div class='center'>
-      <p>username: <%=peep.user.username%><br></p>
+      <p><%=peep.user.username.capitalize%>:<br></p>
       <p1><%= peep.text %><br></p1>
       <p>Posted: <%=peep.created_at.strftime("on %m/%d/%Y, at %I:%M%p")%></p>
     </div><br>

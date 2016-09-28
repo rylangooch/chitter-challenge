@@ -14,10 +14,7 @@ feature 'Creating peeps' do
     fill_in 'peep', with: 'Chitter, I have arrived'
     click_button 'Peep'
     expect(current_path).to eq '/peeps'
-
-    within 'ul#peeps' do
     expect(page).to have_content('User1: Chitter, I have arrived')
-    end
   end
 
   scenario "I can't create a peep without being logged in" do
