@@ -19,10 +19,15 @@
   </form>
 <% end %>
 
-<ul id='peeps'>
-  <% @peeps.each do |peep| %>
-    <li>
-      <%= peep.user.username.capitalize %>: <%= peep.text %>
-    </li>
+
+<% unless @peeps.nil?%>
+  <% @peeps.reverse_each do |peep| %>
+    <% if !peep.created_at.nil? %>
+      <div class='center'>
+        <p>username: <%=peep.user.username%><br></p>
+        <p1><%= peep.text %><br></p1>
+        <p>Posted: <%=peep.created_at.strftime("on %m/%d/%Y, at %I:%M%p")%></p>
+      </div><br>
+    <% end %>
   <% end %>
-</ul>
+<% end %>

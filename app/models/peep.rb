@@ -6,11 +6,10 @@ class Peep
 
   property :id,    Serial
   property :text,  String
-  # property :time, String
+  property :created_at, Time
 
-  # has n, :user, through: Resource
   belongs_to :user
-  
+
 end
 
 DataMapper.setup(:default, "postgres://localhost/chitter_test")
